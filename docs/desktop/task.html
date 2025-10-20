@@ -1,0 +1,338 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Меню Задачи</title>
+<style>
+:root {
+  --bg: #f5f5f7;
+  --surface: #ffffff;
+  --panel: #f3f5fb;
+  --text: #161a22;
+  --muted: #6b7280;
+  --line: #e5e7eb;
+  --primary: #ef3b2d;
+  --orange: #ff6a00;
+  --orange-2: #ff8a00;
+  --green: #17c964;
+  --violet: #7c4dff;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 100%;
+  margin: 0;
+  font-family: Inter, system-ui, Arial, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+}
+
+.appbar {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 14px 24px;
+  background: var(--surface);
+  border-bottom: 1px solid var(--line);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, .04);
+}
+
+.brand {
+  font-weight: 800;
+  font-size: 20px;
+}
+
+.grow {
+  flex: 1;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 14px;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  background: #fff;
+  cursor: pointer;
+  font-weight: 800;
+}
+
+.btn.primary {
+  color: #fff;
+  border-color: #ffd1aa;
+  background: linear-gradient(180deg, #ff9a3c, #fe6a20);
+  box-shadow: 0 10px 24px rgba(255, 122, 0, .35);
+}
+
+.shell {
+  max-width: 1200px;
+  margin: 24px auto;
+  padding: 0 24px;
+  display: grid;
+  grid-template-columns: 1.8fr 1fr;
+  gap: 24px;
+}
+
+.card {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, .06);
+}
+
+.card .hd {
+  padding: 16px 18px;
+  border-bottom: 1px solid var(--line);
+  font-weight: 800;
+}
+
+.card .bd {
+  padding: 18px;
+}
+
+.progress-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+}
+
+.progress-pill {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  background: #eef1f7;
+  border-radius: 12px;
+  padding: 10px;
+}
+
+.progress-pill span {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+}
+
+.progress-pill b {
+  font-size: 18px;
+  margin-left: 16px;
+  margin-top: 4px;
+}
+
+.dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+
+.dot.violet {
+  background: var(--violet);
+}
+
+.dot.orange {
+  background: var(--orange);
+}
+
+.dot.green {
+  background: var(--green);
+}
+
+.stat p {
+  margin: 0;
+  color: #6b6f82;
+}
+
+.chips {
+  display: flex;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.chip {
+  flex: 1;
+  text-align: center;
+  background: #eceffd;
+  color: #6b6f82;
+  border: 1px solid #dde1f2;
+  border-radius: 999px;
+  padding: 8px;
+  font-weight: 800;
+  font-size: 13px;
+}
+
+.chip.active {
+  background: #ffe8d7;
+  color: #c35406;
+  border-color: #ffd1aa;
+}
+
+.chip .num {
+  margin-left: 6px;
+  opacity: .6;
+}
+
+.list {
+  display: grid;
+  gap: 14px;
+}
+
+.task-card {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  padding: 14px;
+  box-shadow: 0 6px 18px rgba(18, 22, 33, .06);
+  cursor: pointer;
+}
+
+.task-title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 800;
+}
+
+.clock {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: #fff0e6;
+  color: #ff8a00;
+  font-size: 16px;
+  border: 1px solid #ffd7b3;
+}
+
+.badges {
+  display: flex;
+  gap: 8px;
+  margin: 10px 0 12px;
+}
+
+.badge {
+  font-size: 12px;
+  font-weight: 800;
+  border-radius: 999px;
+  padding: 6px 8px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.badge.progress {
+  background: #fff0e6;
+  color: #c35406;
+  border: 1px solid #ffd1aa;
+}
+
+.badge.priority {
+  background: #ffe6ea;
+  color: #b32b45;
+  border: 1px solid #ffc8d2;
+}
+
+.strip {
+  height: 4px;
+  border-radius: 4px;
+  background: linear-gradient(90deg, var(--orange), var(--orange-2));
+}
+
+.meta {
+  margin-top: 10px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #7c8296;
+  font-size: 12px;
+}
+
+.calendar {
+  width: 22px;
+  height: 22px;
+  border-radius: 6px;
+  display: grid;
+  place-items: center;
+  background: #eef1f7;
+  border: 1px solid #e1e5f2;
+}
+
+@media (max-width: 1024px) {
+  .shell {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 575px) {
+  .progress-row {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+</style>
+</head>
+<body>
+<header class="appbar">
+  <div class="brand">Органайзер задач</div>
+  <div class="grow"></div>
+  <button class="btn primary" id="createBtn">Создать задачу</button>
+</header>
+
+<main class="shell">
+  <section>
+    <div class="list">
+      <article class="task-card" tabindex="0" role="button" aria-label="Открыть задачу ‘Написать отчёт’">
+        <div class="task-title"><div class="clock">🕒</div>Написать отчёт</div>
+        <div class="badges"><span class="badge progress">В процессе</span><span class="badge priority">Высокий</span></div>
+        <div class="strip"></div>
+        <div class="meta"><span class="calendar">📅</span><span>6 сентября</span></div>
+      </article>
+      <article class="task-card" tabindex="0" role="button" aria-label="Открыть задачу ‘Сдать работу’">
+        <div class="task-title"><div class="clock">🕒</div>Сдать работу</div>
+        <div class="badges"><span class="badge progress">В процессе</span><span class="badge priority">Высокий</span></div>
+        <div class="strip"></div>
+        <div class="meta"><span class="calendar">📅</span><span>5 сентября</span></div>
+      </article>
+    </div>
+  </section>
+
+  <aside>
+    <section class="card">
+      <div class="hd">Резюме вашей работы</div>
+      <div class="bd">
+        <small style="color:var(--muted)">Ваш текущий прогресс</small>
+        <div class="progress-row" style="margin-top:12px">
+          <div class="progress-pill"><span><span class="dot violet"></span>Не сделано</span><b>9</b></div>
+          <div class="progress-pill"><span><span class="dot orange"></span>В процессе</span><b>2</b></div>
+          <div class="progress-pill"><span><span class="dot green"></span>Выполнено</span><b>10</b></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="card stat" style="margin-top:16px">
+      <div class="hd">Статистика на 9 сентября</div>
+      <div class="bd">
+        <p>Вы выполнили на 4 задачи больше, чем обычно. Так держать!</p>
+        <div class="chips">
+          <div class="chip">Всего <span class="num">9</span></div>
+          <div class="chip active">В процессе <span class="num">2</span></div>
+          <div class="chip">Выполнено <span class="num">10</span></div>
+        </div>
+      </div>
+    </section>
+  </aside>
+</main>
+
+<script>
+document.getElementById('createBtn').addEventListener('click', ()=> {
+  window.location.href = 'create.html';
+});
+</script>
+</body>
+</html>

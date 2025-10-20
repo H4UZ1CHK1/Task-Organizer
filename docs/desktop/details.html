@@ -1,0 +1,332 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Детали задания</title>
+<style>
+:root {
+  --bg: #f5f6f8;
+  --surface: #ffffff;
+  --text: #111827;
+  --muted: #6b7280;
+  --line: #e5e7eb;
+  --primary: #ef3b2d;
+  --accent: #ff7a32;
+  --good: #16a34a;
+  --warn: #f59e0b;
+  --bad: #dc2626;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 100%;
+  margin: 0;
+  font-family: Inter, system-ui, Arial, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+}
+
+.page {
+  min-height: 100dvh;
+  display: grid;
+  grid-template-rows: auto 1fr;
+}
+
+.appbar {
+  position: sticky;
+  top: 0;
+  z-index: 5;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 24px;
+  background: var(--surface);
+  border-bottom: 1px solid var(--line);
+}
+
+.back {
+  display: inline-grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  background: #fff;
+  cursor: pointer;
+}
+
+.back span {
+  font-size: 18px;
+}
+
+.title {
+  margin: 0;
+  font-weight: 800;
+  font-size: 20px;
+}
+
+.shell {
+  max-width: 1200px;
+  margin: 24px auto;
+  padding: 0 24px;
+  display: grid;
+  grid-template-columns: minmax(0, 1.6fr) minmax(280px, 0.8fr);
+  gap: 24px;
+}
+
+.card {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, .05);
+}
+
+.card .hd {
+  padding: 16px 18px;
+  border-bottom: 1px solid var(--line);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.card .bd {
+  padding: 18px;
+}
+
+.pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  border-radius: 999px;
+  font-weight: 700;
+  font-size: 12px;
+  border: 1px solid;
+}
+
+.pill.progress {
+  background: #fff7ed;
+  border-color: #ffedd5;
+  color: #9a3412;
+}
+
+.meta {
+  display: flex;
+  gap: 18px;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.progress {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.progress-bar {
+  height: 10px;
+  background: #f1f5f9;
+  border-radius: 999px;
+  overflow: hidden;
+  width: 100%;
+}
+
+.progress-bar > span {
+  display: block;
+  height: 100%;
+  background: linear-gradient(90deg, #ff9a3c, #fe6a20);
+}
+
+.progress-num {
+  font-weight: 800;
+}
+
+.attachments {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+}
+
+.att {
+  border: 2px dashed #ffd1aa;
+  border-radius: 12px;
+  aspect-ratio: 1/1;
+  display: grid;
+  place-items: center;
+  background: #fff;
+  color: #ff6a3a;
+  font-weight: 800;
+}
+
+.att:hover {
+  filter: brightness(.98);
+}
+
+.section h4 {
+  margin: 0 0 8px;
+  font-size: 16px;
+}
+
+.section p {
+  margin: 0;
+  color: #4b5563;
+  line-height: 1.55;
+}
+
+.kv {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 8px;
+}
+
+.kv-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 14px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: #fafbff;
+}
+
+.kv-item b {
+  font-weight: 700;
+}
+
+.badge {
+  padding: 6px 10px;
+  border-radius: 999px;
+  font-weight: 800;
+  font-size: 12px;
+}
+
+.badge.red {
+  background: #fee2e2;
+  color: #991b1b;
+}
+
+.badge.green {
+  background: #dcfce7;
+  color: #166534;
+}
+
+.badge.yellow {
+  background: #fef9c3;
+  color: #854d0e;
+}
+
+.actions {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 14px;
+  border-radius: 10px;
+  border: 1px solid var(--line);
+  background: #fff;
+  cursor: pointer;
+  font-weight: 700;
+}
+
+.btn.primary {
+  background: linear-gradient(180deg, #ff9a3c, #fe6a20);
+  border-color: #ffd1aa;
+  color: #fff;
+  box-shadow: 0 10px 24px rgba(255, 122, 0, .25);
+}
+
+@media (max-width: 1024px) {
+  .shell {
+    grid-template-columns: 1fr;
+  }
+  .attachments {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 575px) {
+  .attachments {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+</style>
+</head>
+<body>
+<main class="page">
+  <header class="appbar">
+    <button class="back" onclick="history.length>1?history.back():location.href='task.html'" aria-label="Назад"><span>←</span></button>
+    <h1 class="title">Детали задания</h1>
+  </header>
+
+  <div class="shell">
+    <section class="card">
+      <div class="hd">
+        <div>
+          <div class="title" style="font-size:18px;font-weight:800">Название задания</div>
+          <div class="meta"><span>Создано: 5 сентября 2025</span><span>ID: #T-1284</span></div>
+        </div>
+        <span class="pill progress"><span>🏳️</span>В процессе</span>
+      </div>
+      <div class="bd">
+        <div class="progress" style="margin-bottom:16px">
+          <div class="progress-bar" aria-label="Прогресс"><span style="width:68%"></span></div>
+          <div class="progress-num">68%</div>
+        </div>
+
+        <div class="section" style="margin-bottom:16px">
+          <h4>Описание</h4>
+          <p>Здесь вы можете придумать описание для своей задачи. Текст переносится, поддерживает длинные абзацы и ссылки.</p>
+        </div>
+
+        <div class="section">
+          <h4>Вложения</h4>
+          <div class="attachments">
+            <div class="att">PDF</div>
+            <div class="att">IMG</div>
+            <div class="att">PNG</div>
+            <label class="att" title="Загрузить"><input type="file" hidden>⤴</label>
+          </div>
+        </div>
+
+        <div class="section" style="margin-top:18px">
+          <div class="actions">
+            <button class="btn primary">Изменить статус</button>
+            <button class="btn">Редактировать</button>
+            <button class="btn" style="color:var(--bad)">Удалить</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <aside class="card">
+      <div class="hd"><b>Сведения</b></div>
+      <div class="bd kv">
+        <div class="kv-item"><span>Приоритет</span><span class="badge red">Высокий</span></div>
+        <div class="kv-item"><span>Сложность</span><span class="badge green">Очень легко</span></div>
+        <div class="kv-item"><span>Статус</span><span class="badge yellow">В работе</span></div>
+        <div class="kv-item"><span>Дедлайн</span><b>15.09.2025</b></div>
+        <div class="kv-item"><span>Исполнитель</span><b>Иван Петров</b></div>
+      </div>
+    </aside>
+  </div>
+</main>
+
+<script>
+Array.from(document.querySelectorAll('.att input[type="file"]')).forEach(inp => {
+  inp.addEventListener('change', () => {
+    alert('Файл выбран: ' + (inp.files?.[0]?.name || 'без имени'));
+  });
+});
+</script>
+</body>
+</html>
